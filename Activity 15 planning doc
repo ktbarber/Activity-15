@@ -1,0 +1,28 @@
+PLANNING DOCUMENT
+GOAL:
+	Make a repository on git hub for my work from activity #14. 
+	In the repository I plan to properly utilize multiple branches, 
+	issues and commits. I also plan to create a README file to give 
+	context to my project. 
+
+NEEDS:
+•	GitHub
+•	GitHub desktop
+•	RStudio
+•	A repository
+•	All code from activity #14
+•	A README file
+•	A plan document
+
+STEPS:
+1.	Create a repository on GitHub
+2.	Clone the repository into GitHub desktop
+3.	Create a new RStudio project inside the new repository
+4.	Create a new branch of work in the repository
+5.	Create an issue for each part of the Activity #14 code
+6.	For each issue:
+  a.	Past the code from activity #14
+  b.	Commit that code with a commit message
+  c.	Pull the commit from the sub branch to the main branch
+7.	Create  README file for the project
+8.	Add in this plan document into the repository
