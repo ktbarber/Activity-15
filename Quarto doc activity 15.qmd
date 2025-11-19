@@ -14,3 +14,125 @@ execute:
   warning: false
 csl: https://www.zotero.org/styles/apa
 ---
+
+{{< pagebreak >}}
+
+## Frequency table of each sex in a specific rank when accounting for all enlisted soldiers in the Army
+
+```{r}
+#| label: fig-military-frequency-table
+#| fig-cap: "Frequency table of each sex in a specific rank when accounting for all enlisted soldiers in the Army"
+#| fig-alt: "Frequency table showing what percent each sex represents in each rank of enlisted soldiers in the Army"
+#| fig-pos: "H"
+# CODE FOR MILITARY FREQUENCY TABLE
+# 1. Load necessary packages: tidyverse, rvest, googlesheets4.
+library(tidyverse)
+library(rvest)
+library(googlesheets4)
+library(dplyr)
+library(janitor)
+library(kableExtra)
+
+# 2. Scrape the Pay Grade and Rank dataset.
+PayGrade_rank <- read_html("https://neilhatfield.github.io/Stat184_PayGradeRanks.html")%>%
+  html_elements(css = "table")%>%
+  html_table()
+PayGrade_rank_raw <- PayGrade_rank[[1]]
+
+# 3. Rename the headers of the Pay Grade and Rank dataset.
+names(PayGrade_rank_raw) <- c("membership", "Pay_Grade", "Army", "Navy",
+                              "Marine.Corps", "Air.Force", "Space.Force",
+                              "Coast.Guard")
+
+# 4. Wrangle the Pay Grade and Rank data set.
+clean_PayGrade_rank <- PayGrade_rank_raw%>% ## get rid of the first column and row
+  select(-membership)%>%
+  slice(-1)%>% ## combine all columns besides Pay Grade to represent rank and branch.
+  pivot_longer(
+    cols = Army:Coast.Guard,
+    names_to = "Branch",
+    values_to = "Ranks"
+  )%>% ## get rid of unnecessary rows
+  slice(-(145:150))
+
+# 4. Load in the Armed Forced data
+gs4_deauth()
+military_Raw <- read_sheet(
+  ss = "https://docs.google.com/spreadsheets/d/19xQnI1cBh6Jkw7eP8YQuuicMlVDF7Gr-nXCb5qbwb_E/edit?usp=sharing",
+  col_names = TRUE,
+  skip = 2,
+  na = c("", "N/A*")
+)
+
+# 5. Wrangle the Armed Forces data
+military_clean <- military_Raw%>% ## get rid of all total columns and rows
+  select(!contains("Total"))%>%
+  slice(c(-10, -16, -27, -28, -29))%>%
+  select(-"Male...17", -"Female...18")%>% ## Rename all male and female columns and provide specific branch.
+  rename(
+    Army_Male = Male...2,
+    Army_Female =  Female...3,
+    Navy_Male = Male...5,
+    Navy_Female = Female...6,
+    Marine.Corps_Male = Male...8,
+    Marine.Corps_Female = Female...9,
+    Air.Force_Male = Male...11,
+    Air.Force_Female = Female...12,
+    Space.Force_Male = Male...14,
+    Space.Force_Female = Female...15
+  )%>% ## create new column combining all columns besides pay grade.
+  pivot_longer(
+    cols = Army_Male:Space.Force_Female,
+    names_to = "Branch_Sex",
+    values_to = "frequency"
+  )%>% ## separate new column by name and branch.
+  separate_wider_delim(
+    cols = Branch_Sex,
+    names = c("Branch", "Sex"),
+    delim = "_"
+  )%>% ## Add the ranks
+  mutate(
+    RankClass = case_when(
+      grepl(pattern = "^E", x = `Pay Grade`) ~ "Enlisted",
+      grepl(pattern = "^W", x = `Pay Grade`) ~ "Warrant Officer",
+      grepl(pattern = "^O", x = `Pay Grade`) ~ "Officer"
+    )
+  )
+
+
+# 6. Join tables
+final_frequency_table <- left_join(
+  x = military_clean,
+  y = clean_PayGrade_rank, 
+  by = join_by(`Pay Grade` == Pay_Grade, Branch == Branch)
+)
+
+# 7. Make case an individual soldier
+final_table <- final_frequency_table %>%
+  filter(!is.na(frequency)) %>% ## Remove all cases with missing counts
+  uncount(
+    weights = frequency
+  )
+
+# 8. Make the frequency data set
+data <- final_table
+Frequency_table <- data%>% 
+  filter(Branch == "Army" & RankClass == "Enlisted")%>% #Choose which branch and rank class to use
+  tabyl(Ranks, Sex)%>% #Choose what frequencies to use
+  adorn_totals(where = c("row", "col"))%>% #set totals
+  adorn_percentages(denominator = "all")%>% #set percentages
+  adorn_pct_formatting(digits = 2) #set format
+
+# 9. Make a frequency table
+Frequency_table %>%
+  kable( #set caption
+    caption = "Frequency table of each sex in a specific rank when accounting for all enlisted soldiers in the Army",
+    booktabs = TRUE,
+    align = c("l", rep("c", 6))
+  ) %>%
+  kable_styling( #set style
+    bootstrap_options = c("striped", "condensed"),
+    font_size = 16
+  )
+```
+@fig-military-frequency-table shows a frequency table showing what percent each sex represents in each rank of enlisted soldiers in the Army.
