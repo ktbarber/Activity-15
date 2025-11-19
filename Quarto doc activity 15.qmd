@@ -215,3 +215,17 @@ ggplot()+
   theme_minimal() ## set the theme of the plot
 ```
 @fig-boxvolume-graph displays the maximum volume of a box over various height values from 0 to 15. This graph calls a box volume function that calculates the volume of a box when given the length width and height. 
+
+{{< pagebreak >}}
+
+## What I have learned from Stat 184
+
+Stat 184 has been a very beneficial course that has made me a better statistician. It has helped me improve my skills in working with data. It has also changed the way I think about data and approaching problems. I have learned a lot about the importance and power of data and data visualizations, RStudio and the vast and inclusive world of open science. 
+
+This class has helped show me the wonderful world of data. I learned that there is data on almost everything in our world. Also, I learned that any data set, no matter how big or small, is able to be worked with. Before taking this course I was not prepared to work with extremely large or intimidating data sets. Now I understand, that was an irrational fear and I am comfortable working with any data set despite the size or contents. Also, I have learned that data can be used to solve almost any problem. Data is not just used to find statistics and trends in numbers but can pinpoint origins of disease and help the world’s best engineers reach space. I learned that data is not just numbers and words in a chart. Data can include maps, diagrams and even art. This is inspiring and further shows the variety that data comes in and how all data can be used to solve issues. 
+
+Another major thing I have learned in this class is RStudio. Stat 184 is centered around RStudio and before taking this course I had little to no experience with this language. I have learned the basics of the language and how to upload and work with data in a console and environment. Also, I learned the organization of R and many of its packages and functions. Learning RStudio has helped me become comfortable with data sets and has shown me that all types of data can be worked with. Also, RStudio has allowed me to improve as a statistician. This class has taught me how to create various data visualizations and their importance. Creating data visualization is a very important skill and is used every day to solve world issues. Data visualizations serve as a way for statisticians to display their ideas in a way that is easily accessible and understood by all. 
+
+Lastly, I have learned about open science. This has helped me improve in the way I approach and tackle problems. I have learned to carefully map out plans and ideas before executing. Also, this has helped me understand what to do when faced with any problem, not just problems including data. I have also learned about the community of open science. Open science is a family with its sole purpose to make everyone a better scientist and problem solver. Although Stat 184 has taught me a lot it has not made me a perfect statistician. Open science serves as a way for me to learn from others and enhance my skills even when I feel I do not know where to go. I have learned of many beneficial sites like Github and R Markdown Gallery that display the work of other data scientists.
+
+Stat 184 has taught me a lot about working with data, RStudio and others. It has helped me improve my data science skills in many ways. It has laid a foundation that I am excited to build off of and better myself in the world of open science and data. 
