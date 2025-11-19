@@ -229,3 +229,8 @@ Another major thing I have learned in this class is RStudio. Stat 184 is centere
 Lastly, I have learned about open science. This has helped me improve in the way I approach and tackle problems. I have learned to carefully map out plans and ideas before executing. Also, this has helped me understand what to do when faced with any problem, not just problems including data. I have also learned about the community of open science. Open science is a family with its sole purpose to make everyone a better scientist and problem solver. Although Stat 184 has taught me a lot it has not made me a perfect statistician. Open science serves as a way for me to learn from others and enhance my skills even when I feel I do not know where to go. I have learned of many beneficial sites like Github and R Markdown Gallery that display the work of other data scientists.
 
 Stat 184 has taught me a lot about working with data, RStudio and others. It has helped me improve my data science skills in many ways. It has laid a foundation that I am excited to build off of and better myself in the world of open science and data. 
+
+{{< pagebreak >}}
+# Code Appendix
+```{r codeAppend, ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
