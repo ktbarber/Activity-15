@@ -1,0 +1,16 @@
+---
+title: "Activity #15"
+subtitle: "Various data visualizations and what I have learned from Stat 184"
+author: "Kyle Barber"
+date: "Nov.19, 2025"
+date-modified: now
+format:
+  pdf:
+    embed-resources: true
+    toc: true
+    link-external-newwindow: false
+execute: 
+  echo: false
+  warning: false
+csl: https://www.zotero.org/styles/apa
+---
