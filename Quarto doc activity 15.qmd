@@ -136,3 +136,44 @@ Frequency_table %>%
   )
 ```
 @fig-military-frequency-table shows a frequency table showing what percent each sex represents in each rank of enlisted soldiers in the Army.
+
+{{< pagebreak >}}
+
+## Popularity of Baby Names Plot
+
+```{r}
+#| label: fig-baby-name-graph
+#| fig-cap: "Plot of popularity of various baby names over time"
+#| fig-alt: "Line graph of the popularity of four baby names: Kyle, Ryan, Scott and Peter from the time period 1880 to 2013."
+#| fig-pos: "H"
+# CODE FOR POPULARITY OF BABY NAMES
+# 1. Load necessary packages
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(dcData)
+data(BabyNames)
+# 2. Filtering our specific names
+Baby_Name <- BabyNames%>%
+  filter(name == c("Kyle", "Peter", "Scott", "Ryan"), sex == "M")
+# 2. Creating plot
+ggplot(Baby_Name) +
+  ## Setting the aesthetic
+  aes(x = year, y = count, colour = name, linetype = name) +
+  geom_line(size = 1.0) +
+  scale_color_hue(direction = 1) +
+  ## Labeling plot
+  labs(
+    x = "YEAR",
+    y = "COUNT",
+  ) +
+  ## Setting theme of plot and size of lines
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 20L,
+                              hjust = 0.5),
+    axis.title.y = element_text(size = 15L),
+    axis.title.x = element_text(size = 15L)
+  )
+```
+@fig-baby-name-graph demonstrates the popularity of the names: Kyle, Ryan, Scott and Peter. I chose these names because I was curious to see the popularity of the names of myself (Kyle) and my friends (Ryan, Scott and Peter) over time. 
