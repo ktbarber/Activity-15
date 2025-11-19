@@ -177,3 +177,41 @@ ggplot(Baby_Name) +
   )
 ```
 @fig-baby-name-graph demonstrates the popularity of the names: Kyle, Ryan, Scott and Peter. I chose these names because I was curious to see the popularity of the names of myself (Kyle) and my friends (Ryan, Scott and Peter) over time. 
+
+{{< pagebreak >}}
+
+## Code for boxvolume function and plot of the maximum box volume vs height
+
+```{r}
+#| label: fig-boxvolume-graph
+#| fig-cap: "Plot of maximum box volume vs height using my boxvolume function"
+#| fig-alt: "Line graph that shows the maximum volume of a box over various height from 0 to 15."
+#| fig-pos: "H"
+# CODE FOR BOX PROBLEM
+# 1. Load necessary packages
+library(ggplot2)
+# 2. Function fo find the volume of a box with given length width and height.
+boxvolume <- function(length, width, height){
+  newLength = length - 2 * height
+  newWidth = width  - 2*height
+  volume = newLength*newWidth*height
+  return(volume)
+}
+
+# 3. Plot of maximum box volume vs height of box using my boxvolume function
+ggplot()+
+  stat_function( ## calling the function
+    fun = boxvolume,
+    args = list(length = 36, width = 48),
+    xlim = c(0, 15)
+  ) +
+  scale_x_continuous( ## set parameters of the x-axis
+    breaks = seq(from = 0, to = 15, by = 1)
+  ) + 
+  labs( ## labeling the plot
+  x = "Height of Box (inches)",
+  y = "Maximum Box Volume (inches cubed)"
+) +
+  theme_minimal() ## set the theme of the plot
+```
+@fig-boxvolume-graph displays the maximum volume of a box over various height values from 0 to 15. This graph calls a box volume function that calculates the volume of a box when given the length width and height. 
